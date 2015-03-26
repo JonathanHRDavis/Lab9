@@ -32,7 +32,7 @@ Points.o: 					Points.h	   Points.cpp
 QuickTest.o: 						       QuickTest.cpp	
 							$(COMPILE)	   QuickTest.cpp
 
-SortPlot.o: 			    SortPlot.h	   SortPlot.cpp	
+SortPlot.o: 			    SortPlot.h	   Sort.h		SortPlot.cpp	
 							$(COMPILE)	   SortPlot.cpp
 
 
