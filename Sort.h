@@ -40,14 +40,11 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
    
    for (int i = 0; i < numItems; i++)
    {
-      sorted[i] = items[i];
-   }  
+     sorted[i] = items[i];
+   }
    
-   
-   _quickSort(sorted,  0, numItems - 1, compare);
+   _quickSort(sorted, 0, numItems - 1, compare);
    return sorted;
-   
-
 }
 
 template < class T >
@@ -59,20 +56,12 @@ void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one,
    //make the necessary partition and recursive calls for quick sort
    if (first < last)
    {
-
-
-	pivotIndex = partition(items, first, last, compare);
+       //create the partition: S1, Pivot, S2
+	   pivotIndex = partition(items, first, last, compare);
+	   // sort regions S1 and S2
+	   _quickSort(items, first, pivotIndex - 1, compare);
+	   _quickSort(items, pivotIndex + 1, last, compare);
 	
-	_quickSort(items, first, pivotIndex - 1, compare);
-	_quickSort(items, pivotIndex + 1, last, compare);
-
-
-
-
-
-
-
-
    }  
 }  
 
@@ -87,33 +76,29 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 
    //initially, choosePivot does nothing           
    choosePivot(items, first, last); 
+   T* pivot =  items[first]; // reference point
    
-   T* pivot = items[first];
-   
-   int lastS1 = first;
-   
-   for (int unknown = first + 1; unknown <= last; unknown++)
+   //initially, everything but pivot is in unknown
+   int lastS1 = first; //index of last item in S1
+
+   //move one item at a time until unknown region is empty
+   for (int unknown =  first + 1; unknown <= last; unknown++)
    {
-   
-		if ((*compare)(items[unknown], pivot) <0 )
-		{
-		 lastS1++;
-		 temp = items[unknown];
-		 items[unknown] = items[lastS1];
-		 items[lastS1] = temp;
-		}
-   
+     //move item from unknown to proper region
+	 if ((*compare)(items[unknown], pivot) <0)
+	 {
+	    //items from unknown belongs in S1
+		lastS1++;
+		temp = items[unknown];
+		items[unknown] = items[lastS1];
+		items[lastS1] = temp;
+	 }
    }
-   
    temp = items[first];
    items[first] = items[lastS1];
    items[lastS1] = temp;
    return lastS1;
 
-
-
-
-     
 
 }
 
@@ -124,11 +109,24 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
 
+	//T* pivot =  items[first]; // reference point
 
-
-
-
-
+	int middle = (first + last) / 2; // find the middle to compare with.
+	if (first > middle) 
+	{
+		Swap (first, middle); // swaps with the 1st item if middle is less.
+	}
+	if ( first > last ) 
+	{
+		Swap (first, last); // swaps the 1st item if the last is less.
+	}
+	if ( middle > last )
+	{
+		Swap (middle, last); // swaps the middle items if the last is less.
+	}
+			
+	return middle;  // return middle
+     
 
 }
 
