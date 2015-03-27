@@ -1,6 +1,7 @@
 #if !defined (SORT_H)
 #define SORT_H
 
+
 template < class T >
 class Sort
 {
@@ -78,6 +79,8 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
    choosePivot(items, first, last); 
    T* pivot =  items[first]; // reference point
    
+   
+   
    //initially, everything but pivot is in unknown
    int lastS1 = first; //index of last item in S1
 
@@ -102,6 +105,17 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
 template < class T >
 void Sort<T>::choosePivot(T** items, int first, int last)
 {
@@ -109,26 +123,21 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
 
-	//T* pivot =  items[first]; // reference point
+int mid = ( (first + last) / 2 ); //compute the middle
 
-	int middle = (first + last) / 2; // find the middle to compare with.
-	if (first > middle) 
-	{
-		Swap (first, middle); // swaps with the 1st item if middle is less.
-	}
-	if ( first > last ) 
-	{
-		Swap (first, last); // swaps the 1st item if the last is less.
-	}
-	if ( middle > last )
-	{
-		Swap (middle, last); // swaps the middle items if the last is less.
-	}
-			
-	return middle;  // return middle
-     
+T* temp = items[first];		// set the value of first to temp
+items[first] = items[mid];	// swap first with mid
+items[mid] = temp;			// swap mid with what first was
+
+return;
+
 
 }
+
+
+
+
+
 
 //no work below this point
 template < class T >

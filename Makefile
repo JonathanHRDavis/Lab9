@@ -20,16 +20,16 @@ all: Lab09
 Lab09: 		$(FILES)
 		$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)	
 		
-Plot.o: 					Plot.h	       Plot.cpp	
+Plot.o: 					Plot.h	       Sort.h		Plot.cpp	
 							$(COMPILE)	   Plot.cpp
 
-Point.o: 					Point.h	       Point.cpp	
+Point.o: 					Point.h	       Sort.h		Point.cpp	
 							$(COMPILE)	   Point.cpp
 
-Points.o: 					Points.h	   Points.cpp	
+Points.o: 					Points.h	   Sort.h		Points.cpp	
 							$(COMPILE)	   Points.cpp
 
-QuickTest.o: 						       QuickTest.cpp	
+QuickTest.o: 						       Sort.h		QuickTest.cpp	
 							$(COMPILE)	   QuickTest.cpp
 
 SortPlot.o: 			    SortPlot.h	   Sort.h		SortPlot.cpp	
